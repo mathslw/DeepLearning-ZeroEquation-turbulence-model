@@ -1,1 +1,50 @@
 # DeepLearning-ZeroEquation-turbulence-model
+
+* Deep learning - RANS CFD framework
+
+Deep learning - RANS CFD framework is an approach to create a coupled framework between a deep learning model trained in python and the OpenFOAM software. The implementation makes use of the TensorFlow C API. Specifically, the implementation shows the creation of a deep learning based zero-equation RANS turbulence model for built environment CFD simulations. The deep learning model of choice is a standard Multi-Layer Perceptron
+
+** Features
+
+1. ~deep-learning-model/~ contains the information and code for the training of the deep learning model. Inside the directory there are:
+   - ~main_NN.py~ contains the main code to train the neural network
+   - ~utilities_NN.py~ contains the function to make the main code works.
+   - ~Data/~ folder to contain the models
+   - ~Models/~ folder to contain the saved trained TensorFlow models
+   - ~Checkpoints/~ temporary folder necessary to allow early stopping and prevent model overfitting
+   - ~python_requirements.txt~ contains the python libraries version which the code was run on.
+
+2. ~turbulence-model/~ contains the code for the deep learning based zero-equation turbulence model in OpenFOAM. The model is an example of zero-equation model which imports a trained TensorFlow deep learning model to directly predict values of /eddy viscosity/ using velocity magnitude and wall distance as input of the predictions. The turbulence model can be used with a standard OpenFOAM solver without needing to change the solver itself. The boundary conditions required are the same as a standard zero equation model. The setup of the simulation is identical to the one using a standard CFD turbulence model. The ~constant/momentumTransport~ OpenFOAM file needs to be provided with the information of the deep learning turbulence model, specifically:
+
+   #+begin_src c++
+     simulationType RAS;
+     ANNmodelDir path/to/the/trained/tensorflow/model;
+     // for example /DL-ZE-turbulence-model/deep-learning-model/Models/HL3-24-36-50
+
+     RAS
+     {
+         RASModel       NNZeroEquation;
+         turbulence     on;
+         printCoeffs    on;
+     }
+   #+end_src
+
+   
+
+
+** Software requirements
+
+- TensorFlow 2.6.2, Tensorflow C API 2.6
+- Python 3.6.9
+- OpenFOAM 9
+
+** Authors
+
+Giovanni Calzolari and Wei Liu
+
+Civil and architectural engineering
+
+KTH, Royal Institute of Technology, Stockholm, Sweden
+
+For information or questions, send email to ~gcal@kth.se~
+
