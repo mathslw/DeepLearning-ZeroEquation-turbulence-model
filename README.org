@@ -29,9 +29,6 @@ Deep learning - RANS CFD framework is an approach to create a coupled framework 
      }
    #+end_src
 
-   
-
-
 ** Software requirements
 
 - TensorFlow 2.6.2, Tensorflow C API 2.6
@@ -48,3 +45,19 @@ KTH, Royal Institute of Technology, Stockholm, Sweden
 
 For information or questions, send email to ~gcal@kth.se~
 
+** Citation
+
+If you want to cite this work, please use:
+
+#+begin_src bibtex
+@inproceedings{calzolari2024deep,
+  title={Deep learning to develop zero-equation based turbulence model for CFD simulations of the built environment},
+  author={Calzolari, Giovanni and Liu, Wei},
+  booktitle={Building Simulation},
+  volume={17},
+  number={3},
+  pages={399--414},
+  year={2024},
+  organization={Springer}
+}
+#+end_src
